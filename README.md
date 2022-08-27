@@ -12,10 +12,10 @@ python -m venv .venv
 .venv/Scripts/Activate.ps1
 ```
 
-### 仮想環境から抜ける
+<!-- ### 仮想環境から抜ける
 ```
 deactivate
-```
+``` -->
 
 ### 必要なライブラリのインストール
 ```
@@ -26,6 +26,8 @@ pip3 install -r requirements.txt
 ```
 pip install django-environ
 ```
+
+<!-- マイグレーションやサーバ起動のときにenv(SERCRET_KEY)だけ読み込めない件は後ほど書く -->
 
 参考資料: https://allneko.club/django/python-environ/
 
@@ -79,6 +81,4 @@ CORS_ORIGIN_WHITELIST = [
 
 MEDIA_URL = ''
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 ```
-
