@@ -1,8 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Post from '../components/post/Post'
+import { getAllPostsData } from '../lib/posts'
 
-const Home: NextPage = () => {
+const Home: NextPage = ({posts}: any) => {
   return (
     <div>
       <Head>
@@ -21,8 +23,19 @@ const Home: NextPage = () => {
         <div className='text-lg mb-3'>BLOG POSTS</div>
         <div className='border w-14'></div>
       </div>
+      <div className='flex flex-wrap m-4 mb-5'>
+        {posts && posts.map((post: any) => <Post key={post.id} post={post} />)}
+      </div>
     </div>
   )
 }
 
 export default Home
+
+export const getStaticProps = async () => {
+  const posts = await getAllPostsData()
+  return {
+    props: { posts },
+    revalidate: 3,
+  }
+}

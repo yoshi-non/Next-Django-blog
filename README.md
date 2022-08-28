@@ -1,84 +1,30 @@
 # Next.js × Django ブログ
 
-## Django(バックエンド)の環境構築
+- フロントエンド
+  - Next.js
+  - TypeScript
+  - TailwindCSS
+- バックエンド
+  - Django
+  - SQLite
 
-### 仮想環境の作成
-```
-python -m venv .venv
-```
+## サーバ起動(VSCode)
 
-### 仮想環境に入る
+バックエンド
 ```
+cd django-api
 .venv/Scripts/Activate.ps1
-```
-
-<!-- ### 仮想環境から抜ける
-```
-deactivate
-``` -->
-
-### 必要なライブラリのインストール
-```
-pip3 install -r requirements.txt
-```
-
-### django-environによる環境変数化(欲しい方のみ)
-```
-pip install django-environ
-```
-
-<!-- マイグレーションやサーバ起動のときにenv(SERCRET_KEY)だけ読み込めない件は後ほど書く -->
-
-参考資料: https://allneko.club/django/python-environ/
-
-### Djangoプロジェクトの作成
-```
-django-admin startproject mysite .
-```
-
-### マイグレーション
-```
-python manage.py migrate
-```
-
-### サーバ起動
-```
 python manage.py runserver
 ```
 
-### スーパーユーザーの作成
+フロントエンド
 ```
-python manage.py createsuperuser
-```
-
-### Djangoアプリケーションの作成
-```
-python manage.py startapp app
+cd next-app
+yarn start
 ```
 
-### DjangoのAPI化
-```py
-# mysite>settings.py
+### ホームページ
+![screencapture-localhost-3000-2022-08-28-20_25_46](https://user-images.githubusercontent.com/83369665/187071746-63b66d6e-d1be-4336-846a-f22e1ec09038.png)
 
-import os
-
-INSTALLED_APPS = [
-    # 略
-    'rest_framework',
-    'app',
-    'corsheaders',
-]
-
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    # 略
-]
-
-# localhost:3000からのアクセスを許可する
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-]
-
-MEDIA_URL = ''
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-```
+### 詳細ページ
+![screencapture-localhost-3000-posts-4-2022-08-28-20_26_16](https://user-images.githubusercontent.com/83369665/187071750-b471a5b3-5642-4a75-af77-673ca3da00c4.png)
