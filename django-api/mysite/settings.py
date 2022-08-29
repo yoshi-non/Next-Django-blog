@@ -35,7 +35,94 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'corsheaders',
+    'django.contrib.sites',
+    'rest_framework.authtoken',
+    'accounts',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+# allauth Googleプロバイダー設定
+# https://django-allauth.readthedocs.io/en/latest/providers.html#google
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+# allauth設定
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+
+# dj_rest_auth設定
+# https://dj-rest-auth.readthedocs.io/en/latest/installation.html
+SITE_ID = 1
+
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_USE_JWT = True
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer'
+}
+
+# REST Framework設定
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.jwt_auth.BasicAuthentication',
+        'rest_framework.jwt_auth.SessionAuthentication',
+        'dj_rest_auth.utils.JWTCookieAuthentication',
+    ),
+}
+
+# Simple JWT設定
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+
+    # 'ALGORITHM': 'HS256',
+    # 'SIGNING_KEY': SECRET_KEY,
+    # 'VERIFYING_KEY': None,
+    # 'AUDIENCE': None,
+    # 'ISSUER': None,
+    # 'JWK_URL': None,
+    # 'LEEWAY': 0,
+
+    'AUTH_HEADER_TYPES': ('JWT',),
+    # 'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'userId',
+    'USER_ID_CLAIM': 'user_id',
+    # 'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+
+    # 'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    # 'TOKEN_TYPE_CLAIM': 'token_type',
+    # 'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+
+    # 'JTI_CLAIM': 'jti',
+
+    # 'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    # 'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+# 認証モデル設定
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
