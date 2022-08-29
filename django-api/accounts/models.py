@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionMixin, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from uuid import uuid4
 from django.utils import timezone
 
@@ -26,12 +26,12 @@ class UserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser, PermissionMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     userId = models.CharField(
         max_length=255, default=uuid4, primary_key=True, editable=False)
     username = models.CharField("名前", max_length=255, unique=True)
     email = models.EmailField("メールアドレス", unique=True)
-    created = models.DateTiemField("入会日", default=timezone.now)
+    created = models.DateTimeField("入会日", default=timezone.now)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
