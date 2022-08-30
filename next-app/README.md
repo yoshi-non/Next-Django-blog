@@ -24,3 +24,9 @@ yarn build
 ```
 yarn start
 ```
+
+### Google Loginの追加
+必要なライブラリのインストール
+```
+yarn add axios next-auth
+```

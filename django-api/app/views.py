@@ -7,10 +7,10 @@ from rest_framework.permissions import AllowAny
 class PostView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_class = (AllowAny,)
+    permission_classes = (AllowAny,)
 
 
 class PostDetailView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_class = (AllowAny,)
+    permission_classes = (AllowAny,)

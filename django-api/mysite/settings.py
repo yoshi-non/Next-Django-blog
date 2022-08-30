@@ -64,6 +64,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # allauth設定
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+# メール認証なしない
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 
 # dj_rest_auth設定
