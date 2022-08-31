@@ -28,5 +28,10 @@ yarn start
 ### Google Loginの追加
 必要なライブラリのインストール
 ```
-yarn add axios next-auth
+yarn add axios
+```
+
+ここではnext-authはv3を使用しているためバージョン指定する必要がある
+```
+yarn add 'next-auth@^3.19.3'
 ```

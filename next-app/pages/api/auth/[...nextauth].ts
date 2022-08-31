@@ -46,6 +46,9 @@ const settings: NextAuthOptions = {
             return session;
         },
     },
+    pages: {
+        signIn: "/auth/signin"
+    }
 };
 
 export default (req: any, res: any) => NextAuth(req, res, settings)
