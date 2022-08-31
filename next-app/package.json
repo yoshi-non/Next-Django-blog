@@ -8,7 +8,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "next": "latest",
-    "next-auth": "^4.10.3",
+    "next-auth": "^3.19.3",
     "react": "18.1.0",
     "react-dom": "18.1.0"
   },

@@ -1,18 +1,18 @@
 import axios from 'axios';
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+// import GoogleProvider from 'next-auth/providers/google';
 import Providers from 'next-auth/providers'
-import type { NextApiRequest, NextApiResponse } from "next"
+// import type { NextApiRequest, NextApiResponse } from "next"
 
 const settings: NextAuthOptions = {
     providers: [
-        GoogleProvider({
+        Providers.Google({
             clientId: process.env.GOOGLE_CLIENT_ID ?? '',
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
         }),
     ],
     callbacks: {
-        async signIn({ user, account, profile }) {
+        async signIn(user, account, profile) {
             if (account.provider === "google") {
                 const { accessToken, idToken } = account
                 try {
@@ -33,7 +33,7 @@ const settings: NextAuthOptions = {
             }
             return false
         },
-        async jwt({ token, user, account, profile, isNewUser }) {
+        async jwt(token, user, account, profile, isNewUser) {
             if (user) {
                 const { accessToken } = user
 
@@ -41,12 +41,11 @@ const settings: NextAuthOptions = {
             }
             return token;
         },
-        //セッションがチェックされた時に呼ばれる
-        async session({ session, user }) {
+        async session(session, user) {
             session.accessToken = user.accessToken;
             return session;
         },
     },
 };
 
-export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, settings)
+export default (req: any, res: any) => NextAuth(req, res, settings)

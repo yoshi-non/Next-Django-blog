@@ -1,9 +1,10 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
+// import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/client'
 import Link from 'next/link'
 import React from 'react'
 
 const Navigation = () => {
-  const { data: session } = useSession();
+  const [session] = useSession();
 
   return (
     <header className='container flex flex-row items-center mx-auto px-5 py-14 max-w-screen-lg'>
